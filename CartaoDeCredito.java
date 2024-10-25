@@ -25,13 +25,13 @@ public class CartaoDeCredito {
 
     public void realizarTransacao(float valor) {
         if (valor > 0) {
-            // Depósito
+            
             saldo += valor;
             System.out.println("Depósito realizado com sucesso! Novo saldo: " + saldo);
         } else {
             // Saque
             if (saldo + limite >= -valor) {
-                saldo += valor; // valor é negativo para saques
+                saldo += valor;
                 System.out.println("Saque realizado com sucesso! Novo saldo: " + saldo);
             } else {
                 System.out.println("Saldo e limite insuficientes para o saque!");
