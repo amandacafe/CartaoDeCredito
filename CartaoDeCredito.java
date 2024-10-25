@@ -61,7 +61,7 @@ public class CartaoDeCredito {
         // Instanciar o cartão de crédito
         CartaoDeCredito cartao = new CartaoDeCredito(numero, nomeTitular, cpfTitular, limite, saldo);
         
-        // Menu de opções
+        
         while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Realizar Transação");
