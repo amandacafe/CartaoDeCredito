@@ -1,55 +1,80 @@
-public class Cliente {
-    private String nome;
-    private String cpf;
-    private String cnpj;
-    private String email;
-    private String telefone;
+import java.util.Scanner;
 
-    public Cliente(String nome, String cpf, String cnpj, String email, String telefone) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.email = email;
-        this.telefone = telefone;
-    }
+public class CartaoDeCredito3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    public String getNome() {
-        return nome;
-    }
+        System.out.print("Digite o nome do titular: ");
+        String nomeCliente = scanner.nextLine();
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+        System.out.print("Digite o CPF do titular: ");
+        String cpfCliente = scanner.nextLine();
 
-    public String getCpf() {
-        return cpf;
-    }
+        System.out.print("Digite o CNPJ do titular (se PJ): ");
+        String cnpjCliente = scanner.nextLine();
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+        System.out.print("Digite o e-mail do titular: ");
+        String emailCliente = scanner.nextLine();
 
-    public String getCnpj() {
-        return cnpj;
-    }
+        System.out.print("Digite o telefone do titular: ");
+        String telefoneCliente = scanner.nextLine();
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+        Cliente cliente = new Cliente(nomeCliente, cpfCliente, cnpjCliente, emailCliente, telefoneCliente);
 
-    public String getEmail() {
-        return email;
-    }
+        System.out.print("Digite o número do cartão: ");
+        String numeroCartao = scanner.nextLine();
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        CartaoDeCredito3 cartao = new CartaoDeCredito3(numeroCartao, cliente, 1000.0f);
 
-    public String getTelefone() {
-        return telefone;
-    }
+        System.out.print("Digite o limite personalizado: ");
+        float limitePersonalizado = scanner.nextFloat();
+        cartao.setLimite(limitePersonalizado);
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        System.out.print("Digite a taxa de cashback (em decimal, por exemplo, 0.05 para 5%): ");
+        float taxaCashback = scanner.nextFloat();
+        cartao.setTaxaCashback(taxaCashback);
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Realizar Transação");
+            System.out.println("2. Consultar Limite");
+            System.out.println("3. Consultar Saldo");
+            System.out.println("4. Realizar Compra");
+            System.out.println("5. Realizar Compra com Cashback");
+            System.out.println("6. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            int opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite o valor da transação (positivo para depósito, negativo para saque): ");
+                    float valorTransacao = scanner.nextFloat();
+                    cartao.realizarTransacao(valorTransacao);
+                    break;
+                case 2:
+                    System.out.println("Limite disponível: " + cartao.consultarLimite());
+                    break;
+                case 3:
+                    System.out.println("Saldo atual: " + cartao.consultarSaldo());
+                    break;
+                case 4:
+                    System.out.print("Digite o valor da compra: ");
+                    float valorCompra = scanner.nextFloat();
+                    cartao.realizarCompra(valorCompra);
+                    break;
+                case 5:
+                    System.out.print("Digite o valor da compra (com cashback): ");
+                    float valorCompraCashback = scanner.nextFloat();
+                    cartao.realizarCompraComCashback(valorCompraCashback);
+                    break;
+                case 6:
+                    System.out.println("Saindo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
     }
 }
